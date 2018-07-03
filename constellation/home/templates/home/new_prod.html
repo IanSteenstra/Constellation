@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+
+    <div class="container">
+      
+      <form method="POST" action="{% url 'new_prod' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="inputName" class="sr-only">Name</label>
+          {{ form.name }}
+        </div>
+        <div class="form-group">
+          <label for="prodName" class="sr-only">Project Name</label>
+            {{ form.project_name }}
+        </div>
+        <div class="form-group">
+          <label for="minGPA" class="sr-only">Minimum Required GPA</label>
+            {{ form.min_gpa }}
+        </div>
+        <div class="form-group">
+          <label for="min_year" class="sr-only">Minimum College Year</label>
+            {{ form.min_year }}
+        </div>
+        <div class="form-group">
+          <label for="min_exp" class="sr-only">Minimum Years of Experience</label>
+            {{ form.min_exp }}
+        </div>
+        <div class="form-group">
+          <label for="keywords" class="sr-only">Related Keywords</label>
+            {{ form.kwords }}
+        </div>
+        <div class="form-group">
+          <label for="req_classes" class="sr-only">Required Classes</label>
+            {{ form.req_classes }}
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </form>
+
+    </div> 
+
+  </body>
+</html>
