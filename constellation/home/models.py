@@ -4,8 +4,8 @@ class Project(models.Model):
     name = models.CharField(max_length=20)
     project_name = models.CharField(max_length=40)
     min_gpa = models.CharField(max_length=4)
-    min_year = models.CharField(max_length=4)
-    min_exp = models.CharField(max_length=4)
+    min_year = models.CharField(max_length=12)
+    min_exp = models.CharField(max_length=2)
     kwords = models.TextField()
     req_classes = models.TextField()
 

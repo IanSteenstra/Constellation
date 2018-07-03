@@ -5,8 +5,10 @@ from .forms import ProjectForm
 # Create your views here.
 
 def index(request):
-	
-	return render(request, 'home/index.html')
+    projects = Project.objects.order_by('project_name')
+    context = {'projects' : projects}
+
+    return render(request, 'home/index.html', context)
 
 def new_prod(request):
     if request.method == 'POST':
