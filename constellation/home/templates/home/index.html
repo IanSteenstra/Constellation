@@ -1,9 +1,9 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'home/home.css' %}" />
 <!DOCTYPE html>
 <html lang="en">
 <body>
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'home/home.css' %}" />
 <h2> Constellation </h2>
 
 <div>
@@ -34,29 +34,42 @@
 </div>
 
 <div>
-	<table id="projects">
-		<tr>
-			<th>Creaters Name</th>
-			<th>Project Name</th>
-			<th>Min GPA</th>
-			<th>Min School Year</th>
-			<th>Min Years of Exp</th>
-			<th>Keywords</th>
-			<th>Required Classes</th>
-		</tr>
-		{% for p in projects %}
-			<tr>
-				<td>{{ p.name }}</td>
-				<td>{{ p.project_name }} </td>
-				<td>{{ p.min_gpa }}</td>
-				<td>{{ p.min_year }}</td>
-				<td>{{ p.min_exp }}</td>
-				<td>{{ p.kwords }}</td>
-				<td>{{ p.req_classes }}</td>
-			</tr>
-		{% endfor %}
-	</table>
+	<h4> Research Projects </h4>
+	<div>
+		<table id="projects" style="width:100%">
+			<thead>
+				<tr>
+					<th>Creator</th>
+					<th>Project Name</th>
+					<th>Created Date</th>
+					<th>Min GPA</th>
+					<th>Min Academic Year</th>
+					<th>Min Years of Experience</th>
+					<th>Keywords</th>
+					<th>Required Classes</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for p in projects %}
+					<tr>
+						<td>{{ p.name }}</td>
+						<td>{{ p.project_name }}</td>
+						<td>{{ p.created_dt }}</td>
+						<td>{{ p.min_gpa }}</td>
+						<td>{{ p.min_year }}</td>
+						<td>{{ p.min_exp }}</td>
+						<td>{{ p.kwords }}</td>
+						<td>{{ p.req_classes }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 </div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{% static 'home/dataTable.js' %}"></script>
 
 </body>
 </html>

@@ -12,10 +12,6 @@
       <form class="form-signin" method="POST" action="{% url 'new_prod' %}">
         {% csrf_token %}
         <div class="form-group">
-          <label for="inputName" class="sr-only">Name</label>
-          {{ form.name }}
-        </div>
-        <div class="form-group">
           <label for="prodName" class="sr-only">Project Name</label>
             {{ form.project_name }}
         </div>
