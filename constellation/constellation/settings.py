@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    #'django_cas_ng',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,17 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'django_cas_ng.backends.CASBackend',
+# ]
+
+# Misc.
+
+LOGIN_REDIRECT_URL = '/home/'
+
+#CAS_SERVER_URL: 'https://cas-auth.server.rpi.edu/cas'
 
 ROOT_URLCONF = 'constellation.urls'
 

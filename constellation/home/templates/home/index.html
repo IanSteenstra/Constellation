@@ -1,52 +1,62 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'home/home.css' %}" />
 <!DOCTYPE html>
 <html lang="en">
-
 <body>
 
-<div>
 <h2> Constellation </h2>
-<p>
-Connect with professors and search for research projects that are the best match for your skills and study.
-</p>
-<p>
-This project seeks to create a website that allows easy communication between students and professors who seek to conduct research together. The website will encompass personnel profiles, research feeds, application templates, and other features similar to LinkedIn.
-</p>
 
 <div>
+
+	{% if user.is_authenticated %}
+    <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+    <a type="button" class="btn btn-link" href="{% url 'logout' %}">User Logout</a>
+	{% else %}
+	    <p>Welcome, new user. Please log in.</p>
+	    <a type="button" class="btn btn-link" href="{% url 'login' %}">User Login</a>
+	{% endif %}
+    
+</div>
+
+<div>
+	<p>
+	Connect with professors and search for research projects that are the best match for your skills and study.
+	</p>
+	<p>
+	This project seeks to create a website that allows easy communication between students and professors who seek to conduct research together. The website will encompass personnel profiles, research feeds, application templates, and other features similar to LinkedIn.
+	</p>
+</div>
+
+<div>
+	<p>
     <a type="button" class="btn btn-link" href="{% url 'new_prod' %}">Create a New Project</a>
+	</p>
 </div>
 
-{% for p in projects %}
 <div>
-	<p>************************************</p>
+	<table id="projects">
+		<tr>
+			<th>Creaters Name</th>
+			<th>Project Name</th>
+			<th>Min GPA</th>
+			<th>Min School Year</th>
+			<th>Min Years of Exp</th>
+			<th>Keywords</th>
+			<th>Required Classes</th>
+		</tr>
+		{% for p in projects %}
+			<tr>
+				<td>{{ p.name }}</td>
+				<td>{{ p.project_name }} </td>
+				<td>{{ p.min_gpa }}</td>
+				<td>{{ p.min_year }}</td>
+				<td>{{ p.min_exp }}</td>
+				<td>{{ p.kwords }}</td>
+				<td>{{ p.req_classes }}</td>
+			</tr>
+		{% endfor %}
+	</table>
 </div>
-<div>
-	<p>Creaters Name: {{ p.name }}</p>
-</div>
-<div>
-	<p>Project Name: {{ p.project_name }}</p>
-</div>
-<div>
-	<p>Min GPA: {{ p.min_gpa }}</p>
-</div>
-<div>
-	<p>Min School Year: {{ p.min_year }}</p>
-</div>
-<div>
-	<p>Min Years of Exp: {{ p.min_exp }}</p>
-</div>
-<div>
-	<p>Keywords: {{ p.kwords }}</p>
-</div>
-<div>
-	<p>Required Classes: {{ p.req_classes }}</p>
-</div>
-<div>
-	<p>************************************</p>
-</div>
-{% endfor %}
 
-</div>
 </body>
-
 </html>
