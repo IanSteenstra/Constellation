@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
-#import django_cas_ng.views as cas_views
 from django.contrib.auth import views as auth_views
+#import django_cas_ng.views as cas_views
 
 
 urlpatterns = [

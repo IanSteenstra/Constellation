@@ -1,9 +1,10 @@
 from django.db import models
+from datetime import datetime
 
 class Project(models.Model):
     name = models.CharField(max_length=20)
     project_name = models.CharField(max_length=40)
-    created_dt = models.DateTimeField(auto_now_add=True)
+    created_dt = models.DateTimeField(default=datetime.now(), blank=True)
     min_gpa = models.CharField(max_length=4)
     min_year = models.CharField(max_length=12)
     min_exp = models.CharField(max_length=2)

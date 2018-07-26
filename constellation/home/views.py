@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from .models import Project
 from .forms import ProjectForm
+from datetime import datetime
 
 
 def index(request):
@@ -15,7 +16,7 @@ def new_prod(request):
         form = ProjectForm(request.POST)
 
         if form.is_valid():
-            new_project = Project(name=request.POST['name'], project_name=request.POST['project_name'], min_gpa=request.POST['min_gpa'], min_year=request.POST['min_year'],
+            new_project = Project(name=request.user, project_name=request.POST['project_name'], created_dt=datetime.now(), min_gpa=request.POST['min_gpa'], min_year=request.POST['min_year'],
             	min_exp=request.POST['min_exp'], kwords=request.POST['kwords'], req_classes=request.POST['req_classes'])
             new_project.save()
             return redirect('index')
