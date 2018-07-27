@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
-from .models import Project
 from .forms import ProjectForm
+from .models import Project
 from datetime import datetime
 
 

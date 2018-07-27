@@ -1,5 +1,6 @@
 from django import forms
 
+
 class ProjectForm(forms.Form):
     project_name = forms.CharField(max_length=40,
     	widget=forms.TextInput(attrs={'class' : 'form-control'}))
@@ -11,4 +12,3 @@ class ProjectForm(forms.Form):
     	widget=forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : '2'}))
     kwords = forms.CharField(widget=forms.Textarea(attrs={'class' : 'form-control', 'placeholder' : 'Machine Learning, Physics'}))
     req_classes = forms.CharField(widget=forms.Textarea(attrs={'class' : 'form-control', 'placeholder' : 'Data Structures'}))
-    

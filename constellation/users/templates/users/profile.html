@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<h2> Welcome to your profile {{ user.get_username }}! </h2>
+	<h4><a type="button" class="btn btn-link" href="{% url 'index' %}">Home Feed</a></h4>
+</head>
+
+<body>
+	{% if exps %}
+		<h3> Experiences </h3>
+		{% for exp in exps %}
+		<p>
+			<h4> Title: {{ exp.title }} </h4>
+		</p>
+		<p>
+			<h4> Company: {{ exp.company }} </h4>
+		</p>
+		<p>
+			<h4> Description: {{ exp.desc }} </h4>
+		</p>
+		{% endfor %}
+	{% endif %}
+	<p><a type="button" class="btn btn-link" href="{% url 'new_exp' %}">Add Experience</a></p>
+</body>
+
+</html>

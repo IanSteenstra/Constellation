@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'users',
     #'django_cas_ng',
 ]
 
@@ -58,7 +59,7 @@ MIDDLEWARE = [
 
 # Misc.
 
-LOGIN_REDIRECT_URL = '/home/'
+LOGIN_REDIRECT_URL = 'home/'
 
 #CAS_SERVER_URL: 'https://cas-auth.server.rpi.edu/cas'
 
