@@ -7,7 +7,7 @@
 
 <body>
 	{% if exps %}
-		<h3> Experiences </h3>
+		<h3> My Experiences </h3>
 		{% for exp in exps %}
 		<p>
 			<h4> Title: {{ exp.title }} </h4>
@@ -16,11 +16,44 @@
 			<h4> Company: {{ exp.company }} </h4>
 		</p>
 		<p>
+			<h4> Time Worked: {{ exp.time }} </h4>
+		</p>
+		<p>
 			<h4> Description: {{ exp.desc }} </h4>
 		</p>
 		{% endfor %}
 	{% endif %}
-	<p><a type="button" class="btn btn-link" href="{% url 'new_exp' %}">Add Experience</a></p>
+	<p><a type="button" class="btn btn-link" href="{% url 'new_exp' %}">Add New Experience</a></p>
+	{% if prod %}
+		<h3> My Projects </h3>
+		{% for p in prod %}
+		<p>
+			<h4> Title: {{ p.project_name }} </h4>
+		</p>
+		<p>
+			<h4> Created Date: {{ p.created_dt }} </h4>
+		</p>
+		<p>
+			<h4> Min GPA: {{ p.min_gpa }} </h4>
+		</p>
+		<p>
+			<h4> Min GPA: {{ p.min_gpa }} </h4>
+		</p>
+		<p>
+			<h4> Min Req Year: {{ p.min_year }} </h4>
+		</p>
+		<p>
+			<h4> Min Years of Exp: {{ p.min_exp }} </h4>
+		</p>
+		<p>
+			<h4> Keywords: {{ p.kwords }} </h4>
+		</p>
+		<p>
+			<h4> Req Classes: {{ p.req_classes }} </h4>
+		</p>
+		{% endfor %}
+	{% endif %}
+	<p><a type="button" class="btn btn-link" href="{% url 'new_prod' %}">Add New Project</a></p>
 </body>
 
 </html>
