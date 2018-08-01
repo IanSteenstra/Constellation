@@ -24,11 +24,12 @@ def edit_profile(request):
         form = ProfileForm(request.POST)
         if form.is_valid():
             old_username = request.user.username
+            new_username = request.POST['username']
             user = User.objects.get(username=request.user)
-            user.username=request.POST['username']
-            user.first_name=request.POST['first_name']
-            user.last_name=request.POST['last_name']
-            user.email=request.POST['email'],
+            user.username = new_username
+            user.first_name = request.POST['first_name']
+            user.last_name = request.POST['last_name']
+            user.email = request.POST['email'],
             # user.password=request.POST['password']
             user.save()
             user.profile.gpa = request.POST['gpa']
