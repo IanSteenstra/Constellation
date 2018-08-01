@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<h2> Welcome to your profile {{ user.get_username }}! </h2>
+	<h2> Welcome to your profile {{ user.username }}! </h2>
 	<h4><a type="button" class="btn btn-link" href="{% url 'index' %}">Home Feed</a></h4>
+	<h3> Personal Information: </h3>
+	{% if user.profile.gpa  %}
+		<h4> GPA: {{ user.profile.gpa }} </h4>
+	{% endif %}
+	{% if user.profile.role == 1 %}
+		<h4> Role: Student </h4>
+	{% elif user.profile.role == 2 %}
+		<h4> Role: Teacher </h4>
+	{% endif %}
+	{% if user.profile.year == 1 %}
+		<h4> Year: Freshman </h4>
+	{% elif user.profile.year == 2 %}
+		<h4> Year: Sophomore </h4>
+	{% elif user.profile.year == 3 %}
+		<h4> Year: Junior </h4>
+	{% elif user.profile.year == 4 %}
+		<h4> Year: Senior </h4>
+	{% endif %}
+	{% if user.profile.desc %}
+		<h4> Description: {{ user.profile.desc }} </h4>
+	{% endif %}
+	<a type="button" class="btn btn-link" href="{% url 'edit_profile' %}">Edit Profile</a>
 </head>
 
 <body>
 	{% if exps %}
-		<h3> My Experiences </h3>
+		<h3> My Experiences: </h3>
 		{% for exp in exps %}
 		<p>
 			<h4> Title: {{ exp.title }} </h4>
@@ -16,7 +38,10 @@
 			<h4> Company: {{ exp.company }} </h4>
 		</p>
 		<p>
-			<h4> Time Worked: {{ exp.time }} </h4>
+			<h4> Start Date: {{ exp.start_date }} </h4>
+		</p>
+		<p>
+			<h4> End Date: {{ exp.end_date }} </h4>
 		</p>
 		<p>
 			<h4> Description: {{ exp.desc }} </h4>
@@ -25,7 +50,7 @@
 	{% endif %}
 	<p><a type="button" class="btn btn-link" href="{% url 'new_exp' %}">Add New Experience</a></p>
 	{% if prod %}
-		<h3> My Projects </h3>
+		<h3> My Projects: </h3>
 		{% for p in prod %}
 		<p>
 			<h4> Title: {{ p.project_name }} </h4>

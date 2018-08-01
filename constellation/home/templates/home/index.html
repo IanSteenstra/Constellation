@@ -14,10 +14,10 @@
 
     <p><a type="button" class="btn btn-link" href="{% url 'logout' %}">User Logout</a></p>
 	{% else %}
-	    <p>Welcome, new user. Please log in.</p>
-	    <a type="button" class="btn btn-link" href="{% url 'login' %}">User Login</a>
-	{% endif %}
-    
+	    <p>Welcome. Please log in or create an account.</p>
+	    <p><a type="button" class="btn btn-link" href="{% url 'login' %}">User Login</a></p>
+		<p><a type="button" class="btn btn-link" href="{% url 'new_user' %}">Create Account</a></p>
+    {% endif %}
 </div>
 
 <div>

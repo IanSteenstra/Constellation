@@ -11,7 +11,7 @@
 
     <div class="container">
       
-      <form class="form-signin" method="POST" action="{% url 'new_exp' %}">
+      <form method="POST" action="{% url 'new_exp' %}">
         {% csrf_token %}
         <div class="form-group">
           <label for="title" class="sr-only">Title</label>
@@ -22,8 +22,12 @@
             {{ form.company }}
         </div>
         <div class="form-group">
-          <label for="time" class="sr-only">Time Worked in Years</label>
-            {{ form.time }}
+          <label for="start_date" class="sr-only">Start Date</label>
+            {{ form.start_date }}
+        </div>
+        <div class="form-group">
+          <label for="end_date" class="sr-only">End Date</label>
+            {{ form.end_date }}
         </div>
         <div class="form-group">
           <label for="desc" class="sr-only">Description</label>
