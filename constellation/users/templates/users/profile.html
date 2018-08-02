@@ -1,5 +1,8 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'users/apps.css' %}" />
 <head>
 	<h2> Welcome to your profile {{ user.username }}! </h2>
 	<h4><a type="button" class="btn btn-link" href="{% url 'index' %}">Home Feed</a></h4>
@@ -28,6 +31,7 @@
 </head>
 
 <body>
+	<div>
 	{% if exps %}
 		<h3> My Experiences: </h3>
 		{% for exp in exps %}
@@ -49,6 +53,8 @@
 		{% endfor %}
 	{% endif %}
 	<p><a type="button" class="btn btn-link" href="{% url 'new_exp' %}">Add New Experience</a></p>
+	</div>
+	<div>
 	{% if prod %}
 		<h3> My Projects: </h3>
 		{% for p in prod %}
@@ -79,6 +85,37 @@
 		{% endfor %}
 	{% endif %}
 	<p><a type="button" class="btn btn-link" href="{% url 'new_prod' %}">Add New Project</a></p>
+	</div>
+	<div>
+	{% if app %}
+		<h4> Applied Projects </h4>
+		<div>
+			<table id="apps" style="width:100%">
+				<thead>
+					<tr>
+						<th>Project Name</th>
+						<th>Applicant</th>
+						<th>Score</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for a in app %}
+						<tr>
+							<td>{{ a.project.project_name }}</td>
+							<td>{{ a.name }}</td>
+							<td>{{ a.score }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% endif %}
+	</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{% static 'users/dataTable.js' %}"></script>
+
 </body>
 
 </html>

@@ -11,7 +11,8 @@ urlpatterns = [
     path('logout/', auth_views.logout, {'next_page': '/home/'}, name='logout'),
     path('new_prod/', views.new_prod, name='new_prod'),
     path('profile/', usr_views.profile, name='profile'),
-    path('new_user/', usr_views.new_user, name='new_user')
+    path('new_user/', usr_views.new_user, name='new_user'),
+    path('apply/<name>/<prod>/<created_dt>/', views.apply, name='apply')
     # path('accounts/login/', cas_views.login, name='cas_ng_login'),
     # path('accounts/logout/', cas_views.logout, name='cas_ng_logout'),
 ]

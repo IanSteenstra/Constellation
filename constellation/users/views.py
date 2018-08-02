@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login
-from home.models import Project
+from home.models import Project, Applicant
 from .models import Experience
 from .forms import ExpForm, UserForm, ProfileForm
 
@@ -53,14 +53,18 @@ def profile(request):
     user = User.objects.get(username=request.user)
     exps = Experience.objects.filter(name=user)
     prod = Project.objects.filter(name=user)
+    app_list = []
     exp_list = []
     prod_list = []
     for exp in exps:
         exp_list.append(exp)
     for p in prod:
+        apps = Applicant.objects.filter(project=p)
+        for a in apps:
+            app_list.append(a)
         prod_list.append(p)
-
-    args = {'user': user, 'exps': exp_list, 'prod': prod_list}
+            
+    args = {'user': user, 'exps': exp_list, 'prod': prod_list, 'app': app_list}
     return render(request, 'users/profile.html', args)
 
 def new_exp(request):
