@@ -3,6 +3,7 @@ from .forms import ProjectForm
 from .models import Project, Applicant
 from datetime import datetime
 from django.http import HttpResponse as HR
+from .utils import score
 
 
 def index(request):
@@ -31,11 +32,11 @@ def apply(request, name, prod, created_dt):
     
     project = Project.objects.get(name=name, project_name=prod, created_dt=created_dt)
     try:
-        new_app = Applicant.objects.filter(name=request.user, project=project, score=10)
+        new_app = Applicant.objects.filter(name=request.user, project=project)
         if new_app:
             html = "<html><body>Already Applied!</body></html>"
             return HR(html)
-        new_app = Applicant.objects.create(name=request.user, project=project, score=10)
+        new_app = Applicant.objects.create(name=request.user, project=project, score=score(request.user, project))
         new_app.save()
     except ValueError:
         html = "<html><body>Must sign in before applying to projects!</body></html>"
