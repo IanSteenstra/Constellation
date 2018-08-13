@@ -26,16 +26,30 @@ def edit_profile(request):
             old_username = request.user.username
             new_username = request.POST['username']
             user = User.objects.get(username=request.user)
-            user.username = new_username
-            user.first_name = request.POST['first_name']
-            user.last_name = request.POST['last_name']
-            user.email = request.POST['email'],
+            if new_username != '':
+                user.username = new_username
+                user.profile.username = new_username
+            if request.POST['first_name'] != '':
+                user.first_name = request.POST['first_name']
+            if request.POST['last_name'] != '':
+                user.last_name = request.POST['last_name']
+            if request.POST['email'] != '':
+                user.email = request.POST['email']
             # user.password=request.POST['password']
             user.save()
-            user.profile.gpa = request.POST['gpa']
-            user.profile.year = request.POST['year'] 
-            user.profile.role = request.POST['role']
-            user.profile.desc = request.POST['desc']
+            if (request.POST['gpa'] != ''): 
+                user.profile.gpa = request.POST['gpa']
+            # Make the default year and role whatever was first put in
+            if (request.POST['year'] != ''): 
+                user.profile.year = request.POST['year']
+            if (request.POST['role'] != ''): 
+                user.profile.role = request.POST['role']
+            if (request.POST['desc'] != ''): 
+                user.profile.desc = request.POST['desc']
+            if (request.POST['skills'] != ''): 
+                user.profile.skills = request.POST['skills']
+            if (request.POST['classes'] != ''): 
+                user.profile.classes = request.POST['classes']
             user.profile.save()
             prod = Project.objects.filter(name=old_username)
             for p in prod:

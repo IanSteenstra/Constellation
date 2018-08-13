@@ -23,10 +23,12 @@ class Profile(models.Model):
         (SENIOR, 'Senior'),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    gpa = models.CharField(max_length=4, blank=True)
-    year = models.PositiveSmallIntegerField(choices=YEAR_CHOICES, null=True, blank=True)
+    gpa = models.CharField(max_length=4, null=True)
+    year = models.PositiveSmallIntegerField(choices=YEAR_CHOICES, null=True)
     desc = models.TextField(max_length=300, blank=True)
-    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True)
+    skills = models.TextField(max_length=1000, blank=True)
+    classes = models.TextField(max_length=1000, blank=True)
 
     def __str__(self): 
         return self.user.username

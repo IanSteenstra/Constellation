@@ -27,6 +27,12 @@
 	{% if user.profile.desc %}
 		<h4> Description: {{ user.profile.desc }} </h4>
 	{% endif %}
+	{% if user.profile.skills %}
+		<h4> Skills: {{ user.profile.skills }} </h4>
+	{% endif %}
+	{% if user.profile.classes %}
+		<h4> Classes: {{ user.profile.classes }} </h4>
+	{% endif %}
 	<a type="button" class="btn btn-link" href="{% url 'edit_profile' %}">Edit Profile</a>
 </head>
 

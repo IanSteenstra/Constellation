@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from .forms import ProjectForm
 from .models import Project, Applicant
 from datetime import datetime
@@ -36,7 +37,8 @@ def apply(request, name, prod, created_dt):
         if new_app:
             html = "<html><body>Already Applied!</body></html>"
             return HR(html)
-        new_app = Applicant.objects.create(name=request.user, project=project, score=score(request.user, project))
+        user = User.objects.get(username=request.user)
+        new_app = Applicant.objects.create(name=user, project=project, score=score(request.user, project))
         new_app.save()
     except ValueError:
         html = "<html><body>Must sign in before applying to projects!</body></html>"
