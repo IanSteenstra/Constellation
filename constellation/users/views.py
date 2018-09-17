@@ -85,6 +85,7 @@ def new_exp(request):
     if request.method == 'POST':
         form = ExpForm(request.POST)
 
+        # Form isnt valid...FIX
         if form.is_valid():
             new_exp = Experience(name=request.user, title=request.POST['title'], company=request.POST['company'], 
                 start_date=request.POST['start_date'], end_date=request.POST['end_date'], desc=request.POST['desc'])

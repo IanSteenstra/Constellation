@@ -2,43 +2,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" type="text/css" href="{% static 'users/apps.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'users/profile.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'users/cards.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <head>
-	<h2> Welcome to your profile {{ user.username }}! </h2>
-	<h4><a type="button" class="btn btn-link" href="{% url 'index' %}">Home Feed</a></h4>
-	<h3> Personal Information: </h3>
-	{% if user.profile.gpa  %}
-		<h4> GPA: {{ user.profile.gpa }} </h4>
-	{% endif %}
-	{% if user.profile.role == 1 %}
-		<h4> Role: Student </h4>
-	{% elif user.profile.role == 2 %}
-		<h4> Role: Teacher </h4>
-	{% endif %}
-	{% if user.profile.year == 1 %}
-		<h4> Year: Freshman </h4>
-	{% elif user.profile.year == 2 %}
-		<h4> Year: Sophomore </h4>
-	{% elif user.profile.year == 3 %}
-		<h4> Year: Junior </h4>
-	{% elif user.profile.year == 4 %}
-		<h4> Year: Senior </h4>
-	{% endif %}
-	{% if user.profile.desc %}
-		<h4> Description: {{ user.profile.desc }} </h4>
-	{% endif %}
-	{% if user.profile.skills %}
-		<h4> Skills: {{ user.profile.skills }} </h4>
-	{% endif %}
-	{% if user.profile.classes %}
-		<h4> Classes: {{ user.profile.classes }} </h4>
-	{% endif %}
-	<a type="button" class="btn btn-link" href="{% url 'edit_profile' %}">Edit Profile</a>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-	<div>
-	{% if exps %}
+
+<div class='topnav'>
+<a href=""> Welcome, {{ user.username }}! </a>
+<a href="{% url 'index' %}">Home Feed</a>
+<a href="{% url 'edit_profile' %}">Edit Profile</a>
+<a href="{% url 'new_exp' %}">Add Experience</a>
+<a href="{% url 'new_prod' %}">Add Project</a>
+</div>
+
+	
+<div class="card">
+	<img src="{% static 'users/static_img.png' %}" alt="{{ user.username }}" style="width:85%">
+
+	<h1>{{user.first_name}} {{user.last_name}} </h1>
+
+	{% if user.profile.role == 1 %}
+		{% if user.profile.year == 1 %}
+		<p class="title"> Student, Freshman </p>
+		{% elif user.profile.year == 2 %}
+			<p class="title"> Student, Sophomore </p>
+		{% elif user.profile.year == 3 %}
+			<p class="title"> Student, Junior </p>
+		{% elif user.profile.year == 4 %}
+			<p class="title"> Student, Senior </p>
+		{% endif %}
+	{% elif user.profile.role == 2 %}
+		<p class="title"> Teacher </p>
+	{% endif %}
+	{% if user.profile.gpa  %}
+		<p> GPA: {{ user.profile.gpa }} </p>
+	{% endif %}	
+</div>
+			
+{% if user.profile.desc %}
+	<div class="card">
+		<h2> Description </h2>
+		<p> {{ user.profile.desc }} </p>
+	</div>
+{% endif %}
+
+{% if user.profile.skills %}
+	<div class="card">
+		<h2> Skills </h2>
+		<p> {{ user.profile.skills }} </p>
+	</div>
+{% endif %}
+
+{% if user.profile.classes %}
+	<div class="card">
+		<h2> Classes </h2>
+		<p> {{ user.profile.classes }} </p>
+	</div>
+{% endif %}
+	
+	
+{% if exps %}
+	<div class="card">
 		<h3> My Experiences: </h3>
 		{% for exp in exps %}
 		<p>
@@ -57,66 +86,44 @@
 			<h4> Description: {{ exp.desc }} </h4>
 		</p>
 		{% endfor %}
-	{% endif %}
-	<p><a type="button" class="btn btn-link" href="{% url 'new_exp' %}">Add New Experience</a></p>
-	</div>
+	</div>	
+{% endif %}
+
+<!--  Break up into individual projects -->
+{% if app %}
 	<div>
-	{% if prod %}
-		<h3> My Projects: </h3>
-		{% for p in prod %}
-		<p>
-			<h4> Title: {{ p.project_name }} </h4>
-		</p>
-		<p>
-			<h4> Created Date: {{ p.created_dt }} </h4>
-		</p>
-		<p>
-			<h4> Min GPA: {{ p.min_gpa }} </h4>
-		</p>
-		<p>
-			<h4> Min GPA: {{ p.min_gpa }} </h4>
-		</p>
-		<p>
-			<h4> Min Req Year: {{ p.min_year }} </h4>
-		</p>
-		<p>
-			<h4> Min Years of Exp: {{ p.min_exp }} </h4>
-		</p>
-		<p>
-			<h4> Keywords: {{ p.kwords }} </h4>
-		</p>
-		<p>
-			<h4> Req Classes: {{ p.req_classes }} </h4>
-		</p>
-		{% endfor %}
-	{% endif %}
-	<p><a type="button" class="btn btn-link" href="{% url 'new_prod' %}">Add New Project</a></p>
-	</div>
-	<div>
-	{% if app %}
-		<h4> Applied Projects </h4>
-		<div>
-			<table id="apps" style="width:100%">
-				<thead>
+		<table id="apps" style="width:100%">
+			<thead>
+				<tr>
+					<th>Project Name</th>
+					<th>Created Date</th>
+					<th>Min GPA</th>
+					<th>Min Academic Year</th>
+					<th>Min Years of Experience</th>
+					<th>Keywords</th>
+					<th>Required Classes</th>
+					<th>Applicant</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for a in app %}
 					<tr>
-						<th>Project Name</th>
-						<th>Applicant</th>
-						<th>Score</th>
+						<td>{{ a.project.project_name }}</td>
+						<td>{{ a.project.created_dt }}</td>
+						<td>{{ a.project.min_gpa }}</td>
+						<td>{{ a.project.min_year }}</td>
+						<td>{{ a.project.min_exp }}</td>
+						<td>{{ a.project.kwords }}</td>
+						<td>{{ a.project.req_classes }}</td>
+						<td>{{ a.name }}</td>
+						<td>{{ a.score }}</td>
 					</tr>
-				</thead>
-				<tbody>
-					{% for a in app %}
-						<tr>
-							<td>{{ a.project.project_name }}</td>
-							<td>{{ a.name }}</td>
-							<td>{{ a.score }}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
+{% endif %}
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
